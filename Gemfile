@@ -38,6 +38,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 4.0'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'email_spec'
 end
 
 group :test do
