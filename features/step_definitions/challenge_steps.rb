@@ -3,16 +3,16 @@ Given('I have added several challenges') do
                     user: @registered_user,
                     title: "Book Reading",
                     description: "Read number of books in a month",
-                    start_date: 03/10/2021,
-                    end_date: 04/10/2021,
+                    start_date: "03/10/2021",
+                    end_date: "04/10/2021",
                     goal: 2,
                     active: true)
   FactoryBot.create(:challenge,
                     user: @registered_user,
                     title: "Fundraising",
                     description: "Fundraising for books",
-                    start_date: 03/10/2021,
-                    end_date: 04/10/2021,
+                    start_date: "03/10/2021",
+                    end_date: "04/10/2021",
                     goal: 200,
                     active: false)
 end
