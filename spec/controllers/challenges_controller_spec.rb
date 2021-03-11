@@ -74,7 +74,7 @@ RSpec.describe ChallengesController, type: :controller do
       allow(challenge).to receive(:update).and_return(true)
     end
 
-    it "updates the book" do
+    it "updates the challenge" do
       patch :update, :params => { id: challenge.id, challenge: params}
       expect(challenge).to have_received(:update)
     end
@@ -96,8 +96,26 @@ RSpec.describe ChallengesController, type: :controller do
         expect(response).to render_template(:edit)
       end
     end
-    
-
   end
+
+  describe "Delete #destroy" do
+    let(:challenge) { FactoryBot.build_stubbed(:challenge)}
+
+    before do
+      allow(Challenge).to receive(:find).and_return(challenge)
+      allow(challenge).to receive(:destroy)
+
+      delete :destroy, params: { id: challenge.id }
+    end
+
+    it "deletes the challenge" do
+      expect(challenge).to have_received(:destroy)
+    end
+
+    it "redirects to the index page" do
+      expect(response).to redirect_to challenges_path
+    end
+  end
+  
   
 end
