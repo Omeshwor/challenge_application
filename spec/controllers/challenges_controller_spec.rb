@@ -64,5 +64,40 @@ RSpec.describe ChallengesController, type: :controller do
     end
 
   end
+
+
+  describe "PATCH challenge#update" do
+    let(:challenge) {FactoryBot.build_stubbed(:challenge)}
+    
+    before do
+      allow(Challenge).to receive(:find).and_return(challenge)
+      allow(challenge).to receive(:update).and_return(true)
+    end
+
+    it "updates the book" do
+      patch :update, :params => { id: challenge.id, challenge: {title: "New Title", description: "Fundraising for books",  start_date: "2021-03-02",  end_date: "2021/04/02",  goal: 200,  active: false }}
+      expect(challenge).to have_received(:update)
+    end
+
+    context "when the update succeeds" do
+      it "redirects to the challenge page" do
+        patch :update, :params => { id: challenge.id, challenge: {title: "New Title", description: "Fundraising for books",  start_date: "2021-03-02",  end_date: "2021/04/02",  goal: 200,  active: false }}
+        expect(response).to redirect_to challenge_path(challenge)
+      end
+    end
+
+    context "when the update fails" do
+      before do
+        allow(challenge).to receive(:update).and_return(false)
+      end
+      it "redirects to the challenge edit page again" do
+        patch :update, :params => { id: challenge.id, challenge: {title: "New Title", description: "Fundraising for books",  start_date: "2021-03-02",  end_date: "2021/04/02",  goal: 200,  active: false }}
+
+        expect(response).to render_template(:edit)
+      end
+    end
+    
+
+  end
   
 end
