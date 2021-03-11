@@ -12,10 +12,30 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
   </div>
 
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.datetime_select :start_date %>
+  </div>
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.datetime_select :end_date %>
+  </div>
+  <div class="field">
+    <%= form.label :goal %>
+    <%= form.number_field :goal, in: 1.00..999.00, step: 0.1 %>
+  </div>
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.select(:active, [[true], [false]])%>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

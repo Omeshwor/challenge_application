@@ -11,3 +11,8 @@ Feature: Challenges Management
     Given I have added several challenges
     When I visit the homepage
     Then I should see the list of my challenges
+
+  Scenario: Adding a new challenge to the challenges
+    When I submit a new challenge
+    Then I should see the new challenge in my challenges
+    

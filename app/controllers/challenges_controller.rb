@@ -21,7 +21,7 @@ class ChallengesController < ApplicationController
 
   # POST /challenges or /challenges.json
   def create
-    @challenge = Challenge.new(challenge_params)
+    @challenge = current_user.challenges.build(challenge_params)
 
     respond_to do |format|
       if @challenge.save
@@ -64,6 +64,6 @@ class ChallengesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def challenge_params
-      params.require(:challenge).permit(:user_id)
+      params.require(:challenge).permit(:user_id, :title, :description, :start_date, :end_date, :active, :goal)
     end
 end

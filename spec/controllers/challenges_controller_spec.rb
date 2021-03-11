@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ChallengesController do
+RSpec.describe ChallengesController, type: :controller do
   let(:user) { instance_double(User) }
 
   before { log_in(user) }
@@ -21,6 +21,48 @@ RSpec.describe ChallengesController do
     end
     
   end
+
+  describe "POST challenges#create" do    
+    let(:challenge) {FactoryBot.build_stubbed(:challenge)}
+
+    let(:params){ { title: "Fundraising", description: "Fundraising for books",  start_date: "2021-03-02",  end_date: "2021/04/02",  goal: 200,  active: false } }
+    before do
+      allow(challenge).to receive(:save)
+      allow(user).to receive_message_chain(:challenges, :build).and_return(challenge)
+    end
+
+    it "saves the challenge" do
+      post :create, params: { challenge: params }
+      expect(challenge).to have_received(:save)
+    end
+
+    context "when the challenge is successfully saved" do
+      before do
+        allow(challenge).to receive(:save).and_return true
   
+        post :create, :params => { :challenge => params }    
+      end
+  
+      it "redirects to the challenge show page" do
+        expect(response).to redirect_to challenge_path(challenge)
+      end
+  
+      it "redirects to challenge show page" do
+        expect(flash[:notice]).to eq("Challenge was successfully created.")
+      end
+    end
+    
+    context "when the challenge can't be save" do
+      before do
+        allow(challenge).to receive(:save).and_return(false)
+        post :create, params: { :challenge => params }
+      end
+
+      it "redirects back to challenge new page" do
+        expect(response).to render_template(:new)
+      end
+    end
+
+  end
   
 end
