@@ -1,6 +1,9 @@
-<h1>Editing Challenge</h1>
+<div class="card-header d-flex align-items-center">
+  <h4>Edit <%= @challenge.title %></h4>
+</div>
+<div class="card">
+  <%= render 'form', challenge: @challenge %>
 
-<%= render 'form', challenge: @challenge %>
-
-<%= link_to 'Show', @challenge %> |
-<%= link_to 'Back', challenges_path %>
+  <%= link_to 'Show', @challenge %> |
+  <%= link_to 'Back', challenges_path %>
+</div>

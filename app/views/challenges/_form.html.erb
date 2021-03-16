@@ -1,42 +1,52 @@
-<%= form_with(model: challenge, local: true) do |form| %>
-  <% if challenge.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
+<div class="card-body">
+    <%= form_with(model: challenge, local: true) do |form| %>
+    <% if challenge.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
 
-      <ul>
-        <% challenge.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% challenge.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-horizontal">
+    
+      <div class="form-group row">
+        <%= form.label :title , class:"col-sm-2 form-control-label" %>
+        <%= form.text_field :title, class:"col-sm-10" %>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label :description , class:"col-sm-2 form-control-label" %>
+        <%= form.text_area :description, class:"col-sm-10" %>
+      </div>
+      <div class="form-group row">
+        <%= form.label :start_date , class:"col-sm-2 form-control-label" %>
+        <%= form.datetime_select :start_date, class:"col-sm-10" %>
+      </div>
+      <div class="form-group row">
+        <%= form.label :end_date , class:"col-sm-2 form-control-label" %>
+        <%= form.datetime_select :end_date, class:"col-sm-10" %>
+      </div>
+      <div class="form-group row">
+        <%= form.label :goal , class:"col-sm-2 form-control-label"  %>
+        <%= form.number_field :goal, in: 1.00..999.00, step: 0.1 , class:"col-sm-10"%>
+      </div>
+      <div class="form-group row">
+        <%= form.label :active , class:"col-sm-2 form-control-label" %>
+        <%= form.select(:active, [["True", true], ["False", false]], class:"col-sm-10 mb-3") %>
+      </div>
+      <div class="form-group row">
+        <%= form.submit class:"col-sm-10 offset-sm-2 btn btn-primary" %>
+      </div>
+
     </div>
+
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.datetime_select :start_date %>
-  </div>
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.datetime_select :end_date %>
-  </div>
-  <div class="field">
-    <%= form.label :goal %>
-    <%= form.number_field :goal, in: 1.00..999.00, step: 0.1 %>
-  </div>
-  <div class="field">
-    <%= form.label :active %>
-    <%= form.select(:active, [[true], [false]])%>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
+
