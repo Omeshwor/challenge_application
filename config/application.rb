@@ -31,5 +31,10 @@ module ChallengeApplication
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    ActionView::Base.field_error_proc = proc do |html_tag, instance|
+      html_tag.gsub("form-control-label", "form-control is-invalid").html_safe
+    end
+    
   end
 end
