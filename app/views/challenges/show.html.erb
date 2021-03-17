@@ -1,7 +1,29 @@
-<p>
-  <strong>User:</strong>
-  <%= @challenge.user_id %>
-</p>
+<div class="card">
+  <div class="card-header">
+    <%= @challenge.title %>
+  </div>
+  <div class="card-body">
+    <div class="card-subtitle">
+      <%= @challenge.user.email %>  
+    </div>
+    <div class="card-text">
+      <%= @challenge.description %> 
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Goal: <%= @challenge.goal %></li>
+      <li class="list-group-item">Start Date: <%= @challenge.start_date %></li>
+      <li class="list-group-item">End Date: <%= @challenge.end_date %></li>
+      <li class="list-group-item">Active: <%= @challenge.active %></li>
+    </ul>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_challenge_path(@challenge), class:"btn-sm btn-success" %> | 
+    <%= link_to 'Delete', challenge_path(@challenge), method: :delete, class:"btn-sm btn-danger" %>|
+    <%= link_to 'Back', challenges_path, class:"btn-sm btn-dark" %>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-<%= link_to 'Back', challenges_path %>
+
+
+
+
