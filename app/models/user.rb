@@ -6,5 +6,5 @@ class User < ApplicationRecord
   
   has_many :challenges, dependent: :destroy
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendship, dependent: :destroy
+  has_many :friends, through: :friendships, dependent: :destroy
 end

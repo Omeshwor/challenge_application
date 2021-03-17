@@ -1,5 +1,19 @@
-<ul>
-  <% @users.each do |u| %>
-    <%= u.email %>
-  <% end %>
-</ul>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User Email</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></th>
+        <td><%= user.email %></td>
+        <td><%= link_to "Add to friends", friendships_path(friend: user),
+                class:"btn btn-sm btn-warning", method: :post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
