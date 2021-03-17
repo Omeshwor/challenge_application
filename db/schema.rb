@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2021_03_17_190916) do
   create_table "competitors", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "challenge_id", null: false
-    t.decimal "progress", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["challenge_id"], name: "index_competitors_on_challenge_id"
