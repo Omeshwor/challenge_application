@@ -1,5 +1,3 @@
-class Competitors < ApplicationRecord
+class Competitor < ApplicationRecord
   belongs_to :challenge
-  has_many :users
-
 end

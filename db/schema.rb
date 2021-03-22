@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_190916) do
+ActiveRecord::Schema.define(version: 2021_03_18_204451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2021_03_17_190916) do
     t.bigint "friend_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "competitor_id"
+    t.index ["competitor_id"], name: "index_friendships_on_competitor_id"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
@@ -65,5 +67,6 @@ ActiveRecord::Schema.define(version: 2021_03_17_190916) do
   add_foreign_key "competitors", "challenges"
   add_foreign_key "competitors", "users"
   add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "competitor_id"
   add_foreign_key "friendships", "users", column: "friend_id"
 end

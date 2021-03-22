@@ -1,6 +1,7 @@
 class Challenge < ApplicationRecord
   belongs_to :user
-  
+  has_many :competitors
+
   validates :title, presence: true, length: {minimum: 3, maximum: 100}
   validates :description, presence: true, length: {minimum: 10, maximum: 256}
   validates :goal, numericality: { greater_than: 0, less_than: 1000 }
