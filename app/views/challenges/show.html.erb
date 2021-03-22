@@ -21,6 +21,9 @@
     <%= link_to 'Delete', challenge_path(@challenge), method: :delete, class:"btn-sm btn-danger" %>|
     <%= link_to 'Back', challenges_path, class:"btn-sm btn-dark" %>
   </div>
+  <div class="card-footer">
+    <%= link_to "Join Challenge", competitors_path(challenge: @challenge), class: "btn-sm btn-info", method: :post %>
+  </div>
 </div>
 
 
