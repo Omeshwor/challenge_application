@@ -22,7 +22,11 @@
     <%= link_to 'Back', challenges_path, class:"btn-sm btn-dark" %>
   </div>
   <div class="card-footer">
-    <%= link_to "Join Challenge", competitors_path(challenge: @challenge), class: "btn-sm btn-info", method: :post %>
+    <% if challenge_competitor?(@challenge.id, current_user) %>
+      <%= link_to "Join Challenge", competitors_path(challenge: @challenge), class: "btn-sm btn-info", method: :post %>
+    <% else %>
+      <%= link_to "Leave Challenge", competitor_path(challenge: @challenge, user: current_user), method: :delete, class:"btn-sm btn-danger" %>
+  <% end %>
   </div>
 </div>
 

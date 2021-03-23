@@ -11,5 +11,11 @@ class CompetitorsController < ApplicationController
       redirect_to challenge_path(@Challenge)
     end
   end
-  
+
+  def destroy
+    @competitor = Competitor.find_by(user_id: params[:user], challenge_id: params[:challenge])
+    @competitor.destroy
+    flash[:success] = "Left challenge successfully"
+    redirect_to challenges_path
+  end
 end
