@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_204451) do
+ActiveRecord::Schema.define(version: 2021_03_23_200635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,26 @@ ActiveRecord::Schema.define(version: 2021_03_18_204451) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "user_challenge_datas", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
+    t.decimal "challenge_data", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_user_challenge_datas_on_challenge_id"
+    t.index ["user_id"], name: "index_user_challenge_datas_on_user_id"
+  end
+
+  create_table "user_challenge_details", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
+    t.decimal "detail", precision: 10, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_user_challenge_details_on_challenge_id"
+    t.index ["user_id"], name: "index_user_challenge_details_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -69,4 +89,8 @@ ActiveRecord::Schema.define(version: 2021_03_18_204451) do
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "competitor_id"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "user_challenge_datas", "challenges"
+  add_foreign_key "user_challenge_datas", "users"
+  add_foreign_key "user_challenge_details", "challenges"
+  add_foreign_key "user_challenge_details", "users"
 end
