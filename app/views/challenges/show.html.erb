@@ -30,7 +30,46 @@
   </div>
 </div>
 
+<% if !challenge_competitor?(@challenge.id, current_user) %>
+  <div class="table-responsive">
+  <table class="table table-hover">
+    <div class="d-flex justify-content-center">
+      <%= form_for(:user_challenge_detail, url: user_challenge_details_path) do |f| %>
+        <%= f.hidden_field :challenge_id, value: @challenge.id %>
+        <%= f.hidden_field :competitor_id, value: current_user.id %>
+        <div class="form_group row">
+          <div class="col-form-label col-sm-3">
+            <%= f.label :detail %>
+          </div>
+          <div class="col-sm-4">
+            <%= f.number_field :detail, step: 0.1, class: "form-control", autofocus: true %>
+          </div>
+          <%= f.submit "Add", class:"btn-sm btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <thead>
+      <tr>
+        <th>Creator</th>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @competitor_details.each do |details| %>
+        <tr>
+          <td><%= details.created_at %></td>
+          <td><%= details.detail %></td>
+          <td><%= link_to 'Show', details, class:"btn-sm btn-info" %></td>
+          <td><% if details.competitor_id == current_user %>
+            <%= link_to "Edit", edit_user_challenge_details_path(details), class:"btn-sm btn-primary" %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody> 
+  </table>
+</div>
 
 
-
-
+<% end %>

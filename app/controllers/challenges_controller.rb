@@ -8,6 +8,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges/1 or /challenges/1.json
   def show
+    @competitor_details = UserChallengeDetail.where(challenge_id: @challenge, competitor_id: current_user).all
   end
 
   # GET /challenges/new

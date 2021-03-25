@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, dependent: :destroy
 
   has_many :challenges
-
+  belongs_to :competitor
 end

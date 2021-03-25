@@ -42,30 +42,18 @@ ActiveRecord::Schema.define(version: 2021_03_23_200635) do
     t.bigint "friend_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "competitor_id"
-    t.index ["competitor_id"], name: "index_friendships_on_competitor_id"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "user_challenge_datas", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "challenge_id", null: false
-    t.decimal "challenge_data", precision: 10, scale: 2
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["challenge_id"], name: "index_user_challenge_datas_on_challenge_id"
-    t.index ["user_id"], name: "index_user_challenge_datas_on_user_id"
-  end
-
   create_table "user_challenge_details", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "competitor_id", null: false
     t.bigint "challenge_id", null: false
     t.decimal "detail", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["challenge_id"], name: "index_user_challenge_details_on_challenge_id"
-    t.index ["user_id"], name: "index_user_challenge_details_on_user_id"
+    t.index ["competitor_id"], name: "index_user_challenge_details_on_competitor_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,10 +75,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_200635) do
   add_foreign_key "competitors", "challenges"
   add_foreign_key "competitors", "users"
   add_foreign_key "friendships", "users"
-  add_foreign_key "friendships", "users", column: "competitor_id"
   add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "user_challenge_datas", "challenges"
-  add_foreign_key "user_challenge_datas", "users"
   add_foreign_key "user_challenge_details", "challenges"
-  add_foreign_key "user_challenge_details", "users"
+  add_foreign_key "user_challenge_details", "competitors"
 end
