@@ -8,7 +8,8 @@ class ChallengesController < ApplicationController
 
   # GET /challenges/1 or /challenges/1.json
   def show
-    @competitor_details = UserChallengeDetail.where(challenge_id: @challenge, competitor_id: current_user).all
+    competitor = Competitor.find_by(challenge_id: @challenge.id, user_id: current_user)
+    @competitor_details = competitor.user_challenge_details.all
   end
 
   # GET /challenges/new

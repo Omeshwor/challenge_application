@@ -48,11 +48,9 @@ ActiveRecord::Schema.define(version: 2021_03_23_200635) do
 
   create_table "user_challenge_details", force: :cascade do |t|
     t.bigint "competitor_id", null: false
-    t.bigint "challenge_id", null: false
     t.decimal "detail", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["challenge_id"], name: "index_user_challenge_details_on_challenge_id"
     t.index ["competitor_id"], name: "index_user_challenge_details_on_competitor_id"
   end
 
@@ -76,6 +74,5 @@ ActiveRecord::Schema.define(version: 2021_03_23_200635) do
   add_foreign_key "competitors", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "user_challenge_details", "challenges"
   add_foreign_key "user_challenge_details", "competitors"
 end

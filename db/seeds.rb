@@ -56,14 +56,9 @@ def seed_friends
 end
 
 # def seed_challenge_details
-#   @challenges = Challenge.all
-#   @challenges.each do |challenge|
-#     @users = @challenge.competitors.all
-
-
-#   @challenges.each do |challenge|
-#     challenge.user
-
+#   @competitors = Competitor.all
+#   @
+  
 # end
 
 

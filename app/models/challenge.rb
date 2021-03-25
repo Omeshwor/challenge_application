@@ -1,7 +1,7 @@
 class Challenge < ApplicationRecord
   belongs_to :user
-  has_many :competitors
-  has_many :user_challenge_details, through: :competitors, dependent: :destroy
+  has_many :competitors, dependent: :destroy
+  
 
   validates :title, presence: true, length: {minimum: 3, maximum: 100}
   validates :description, presence: true, length: {minimum: 10, maximum: 256}
